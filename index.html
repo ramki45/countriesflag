@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var country = document.createElement('div');
+        country.style.display="flex";
+        country.style.flexDirection="row";
+        country.style.flexWrap="wrap";
+
+        fetch('https://restcountries.com/v3.1/all')
+        .then(response => response.json())
+        .then(data=>{
+        for(i=0;i<data.length; i++){
+            var detail = document.createElement('div');
+            detail.innerText=data[i].flag;
+            detail.style.padding="25px 25px 25px 25px";
+
+            detail.style.width="24%";
+            detail.style.height="100px";
+            detail.style.border="2px solid green";
+            var flag = document.createElement('div');
+            flag.style.height="50px";
+            flag.innerText = data[i].name.common;
+            var twoCode =document.createElement('div');
+            twoCode.style.height="25px";
+            twoCode.innerText=data[i].idd.root;
+            
+            flag.appendChild(twoCode);
+            detail.appendChild(flag);
+            country.appendChild(detail);
+       }  
+       })
+
+        document.body.appendChild(country);
+    </script>
+</body>
+</html>
